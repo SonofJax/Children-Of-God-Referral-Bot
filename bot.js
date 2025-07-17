@@ -12,6 +12,15 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 // Start command with optional referral
 bot.start(async (ctx) => {
   const userId = ctx.from.id;
+  await supabase
+  .from("user_stats")
+  .upsert(
+    {
+      user_id: userId,
+      username: ctx.from.username || "unknown"
+    },
+    { onConflict: "user_id" }
+  );
   const referrerId = ctx.startPayload;
 
   if (referrerId && referrerId !== userId.toString()) {
@@ -47,6 +56,26 @@ bot.start(async (ctx) => {
     );
   }
 });
+
+bot.command("stats", async (ctx) => {
+  const userId = ctx.from.id;
+
+  const { data, error } = await supabase
+    .from("user_stats")
+    .select("*")
+    .eq("user_id", userId)
+    .single();
+
+  if (error || !data) {
+    ctx.reply("📉 No stats found yet.");
+  } else {
+    ctx.reply(`📊 Your Stats:
+- 👥 Referrals: ${data.referral_count}
+- 🖱️ Taps: ${data.tap_count}
+- 🎁 Reward Claimed: ${data.reward_claimed ? "Yes" : "No"}`);
+  }
+});
+
 
 // Referral link command
 bot.command("referral", async (ctx) => {
