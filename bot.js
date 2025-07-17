@@ -1,5 +1,7 @@
-import { Telegraf } from "telegraf";
-import { createClient } from "@supabase/supabase-js";
+const { Telegraf } = require('telegraf');
+const fetch = require('node-fetch');
+const { createClient } = require('@supabase/supabase-js');
+require('dotenv').config();
 
 // ENV Variables (make sure these are set in Render):
 const BOT_TOKEN = process.env.BOT_TOKEN;
