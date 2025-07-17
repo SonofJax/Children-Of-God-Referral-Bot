@@ -1,12 +1,8 @@
-const { Telegraf } = require("telegraf");
-const { createClient } = require("@supabase/supabase-js");
-
-// 🔐 Config
-const bot = new Telegraf("8005188024:AAGpcn57zegtUZqjnPIq_zbJEOmkVgWCuFA");
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const supabase = createClient(
-  "https://rmtzqwtqfpebsopoxtqd.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJtdHpxd3RxZnBlYnNvcG94dHFkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Mjc5MDcxOCwiZXhwIjoyMDY4MzY2NzE4fQ.MV50jThQS_QvUD5HucSZaPEImF_WYCSDscMVjLOYpew"
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY
 );
 
 bot.start(async (ctx) => {
