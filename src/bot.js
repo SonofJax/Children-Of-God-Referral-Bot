@@ -4,16 +4,18 @@ const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 
 // ENV Variables (make sure these are set in Render):
-const BOT_TOKEN = process.env.bot_token;
-const SUPABASE_URL = process.env.supabaseUrl;
-const SUPABASE_KEY = process.env.supabaseKey;
+// Load env vars (works with either style)
+const BOT_TOKEN = process.env.BOT_TOKEN      || process.env.bot_token;
+const SUPABASE_URL = process.env.SUPABASE_URL   || process.env.supabaseUrl;
+const SUPABASE_KEY = process.env.SUPABASE_KEY   || process.env.supabaseKey;
 
-if (!BOT_TOKEN) throw new Error('bot_token is required.');
-if (!SUPABASE_URL) throw new Error('supabaseUrl is required.');
-if (!SUPABASE_KEY) throw new Error('supabaseKey is required.');
+if (!BOT_TOKEN)      throw new Error('BOT_TOKEN is required.');
+if (!SUPABASE_URL)   throw new Error('SUPABASE_URL is required.');
+if (!SUPABASE_KEY)   throw new Error('SUPABASE_KEY is required.');
 
-const bot = new Telegraf(BOT_TOKEN);
+const bot      = new Telegraf(BOT_TOKEN);
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
 
 // Start command with optional referral
 bot.start(async (ctx) => {
