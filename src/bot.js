@@ -4,6 +4,26 @@ const app = express();
 app.get('/', (_, res) => res.send('OK'));
 app.listen(process.env.PORT || 9999);
 
+app.post('/save', async (req, res) => {
+  const { user_id, clicks, energy, purchases, adViews } = req.body;
+
+  const { error } = await supabase
+    .from('user_stats')
+    .upsert([{ 
+      user_id, 
+      clicks, 
+      energy, 
+      purchases, 
+      adViews 
+    }], { onConflict: ['user_id'] });
+
+  if (error) {
+    console.error('Error saving user stats:', error);
+    return res.status(500).json({ error: 'Failed to save stats' });
+  }
+
+  res.status(200).json({ message: 'Stats saved' });
+});
 
 // rest of your bot logic
 const { Telegraf } = require('telegraf');
