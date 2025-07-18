@@ -9,6 +9,7 @@
   "dependencies": {
     "node-fetch": "^2.6.1",
     "telegraf": "^4.12.2",
+    "express": "^4.19.0",   
     "@supabase/supabase-js": "^2.39.3",
     "dotenv": "^16.0.3"
   }
