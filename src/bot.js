@@ -1,6 +1,6 @@
 import express from 'express';                         // 👈 1
 express().get('/', (_, res) => res.send('OK'))          // 👈 2
-        .listen(process.env.PORT || 3000);              // 👈 3
+        .listen(process.env.PORT || 9999);              // 👈 3
 
 // …existing imports and bot code below …
 import { Telegraf } from 'telegraf';
