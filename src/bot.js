@@ -1,10 +1,9 @@
-import express from 'express';                         // 👈 1
-express().get('/', (_, res) => res.send('OK'))          // 👈 2
-        .listen(process.env.PORT || 9999);              // 👈 3
+const express = require('express');
+const app = express();
 
-// …existing imports and bot code below …
-import { Telegraf } from 'telegraf';
-import { createClient } from '@supabase/supabase-js';
+app.get('/', (_, res) => res.send('OK'));
+app.listen(process.env.PORT || 9999);
+
 
 // rest of your bot logic
 const { Telegraf } = require('telegraf');
