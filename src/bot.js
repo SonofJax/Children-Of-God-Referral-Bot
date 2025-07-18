@@ -1,3 +1,12 @@
+import express from 'express';                         // 👈 1
+express().get('/', (_, res) => res.send('OK'))          // 👈 2
+        .listen(process.env.PORT || 3000);              // 👈 3
+
+// …existing imports and bot code below …
+import { Telegraf } from 'telegraf';
+import { createClient } from '@supabase/supabase-js';
+
+// rest of your bot logic
 const { Telegraf } = require('telegraf');
 const fetch = require('node-fetch');
 const { createClient } = require('@supabase/supabase-js');
